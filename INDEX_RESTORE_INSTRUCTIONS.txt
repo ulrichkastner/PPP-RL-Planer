@@ -1,1 +1,0 @@
-The published index is restored via git tree in the next commit.
