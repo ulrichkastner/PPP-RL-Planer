@@ -4,8 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PPP-RL 2027 · Klinikplanung v15</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
-<style>
-/* placeholder */
-</style>
-</head><body><p>v15 deployment placeholder</p></body></html>
+</head>
+<body>
+<div id="boot" style="font-family:system-ui;padding:24px">PPP-RL Planer v15 wird geladen …</div>
+<script>
+(function(){
+  var src='https://raw.githubusercontent.com/ulrichkastner/PPP-RL-Planer/8374ce5aa83b336f54cc2734c0142eba4984ccd3/index.html';
+  fetch(src,{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.text();})
+    .then(function(html){document.open();document.write(html);document.close();})
+    .catch(function(err){document.getElementById('boot').textContent='Fehler beim Laden des PPP-RL Planers: '+err.message;});
+})();
+</script>
+</body>
+</html>
