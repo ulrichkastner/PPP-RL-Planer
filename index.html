@@ -13,10 +13,16 @@
   fetch(src,{cache:'no-store'})
     .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.text();})
     .then(function(html){
-      var patch='<script src="v15-patch.js?v=16.2"><\/script>';
-      if(html.indexOf('</body>')>=0) html=html.replace('</body>',patch+'</body>');
-      else html+=patch;
-      document.open();document.write(html);document.close();
+      document.open();
+      document.write(html);
+      document.close();
+      setTimeout(function(){
+        var s=document.createElement('script');
+        s.src='v15-patch.js?v=16.2-accordion-2';
+        s.onload=function(){console.log('PPP-RL v16.2 patch loaded');};
+        s.onerror=function(){console.error('PPP-RL v16.2 patch failed to load');};
+        document.body.appendChild(s);
+      },800);
     })
     .catch(function(err){document.getElementById('boot').textContent='Fehler beim Laden des PPP-RL Planers: '+err.message;});
 })();
