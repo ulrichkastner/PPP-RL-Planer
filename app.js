@@ -11,5 +11,6 @@
   load('app-core.js')
     .then(function(){return load('app-config.js');})
     .then(function(){return load('app-main.js');})
+    .then(function(){return load('v15-patch.js');})
     .catch(function(err){console.error('PPP-RL Startfehler',err);});
 })();
