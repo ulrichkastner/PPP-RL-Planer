@@ -1,2 +1,45 @@
 <!DOCTYPE html>
-<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>PPP-RL Planer v17</title></head><body><p>PPP-RL Planer v17 wird geladen …</p><script>window.location.replace('v17.html');</script><noscript><a href="v17.html">PPP-RL Planer v17 öffnen</a></noscript></body></html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPP-RL 2027 · Klinikplanung v16.2</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css?v=16.2.1">
+</head>
+<body>
+<div id="boot" style="font-family:system-ui;padding:24px">PPP-RL Planer v16.2 wird geladen …</div>
+<script>
+(function(){
+  'use strict';
+  var base='https://raw.githubusercontent.com/ulrichkastner/PPP-RL-Planer/8374ce5aa83b336f54cc2734c0142eba4984ccd3/index.html';
+  function loadScript(src){
+    return new Promise(function(resolve,reject){
+      var s=document.createElement('script');
+      s.src=src;
+      s.onload=resolve;
+      s.onerror=function(){reject(new Error('Konnte '+src+' nicht laden'));};
+      document.body.appendChild(s);
+    });
+  }
+  fetch(base,{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw new Error('Basis HTTP '+r.status);return r.text();})
+    .then(function(html){
+      var parsed=new DOMParser().parseFromString(html,'text/html');
+      var scripts=parsed.body.querySelectorAll('script');
+      for(var i=scripts.length-1;i>=0;i--)scripts[i].parentNode.removeChild(scripts[i]);
+      document.body.innerHTML=parsed.body.innerHTML;
+      return loadScript('app-core.js?v=16.2.1');
+    })
+    .then(function(){return loadScript('app-config.js?v=16.2.1');})
+    .then(function(){return loadScript('app-main.js?v=16.2.1');})
+    .then(function(){return loadScript('v15-patch.js?v=16.2.1');})
+    .then(function(){console.log('PPP-RL v16.2 vollständig geladen');})
+    .catch(function(err){
+      console.error(err);
+      document.body.innerHTML='<div style="font-family:system-ui;padding:24px;color:#a33"><strong>Startfehler PPP-RL v16.2</strong><br>'+err.message+'</div>';
+    });
+})();
+</script>
+</body>
+</html>
