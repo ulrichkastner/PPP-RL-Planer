@@ -1,1 +1,0 @@
-Temporary marker while restoring the last working index for v15 deployment.
